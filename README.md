@@ -2,7 +2,7 @@
 
 ## About The Project
 
-The series of functions contained in this repository were developed to perform a dominance analysis using a define response variable and a determined pool of predictors.
+The series of functions contained in this repository were developed to perform a dominance analysis using a defined response variable and a determined pool of predictors.
 
 <!-- USAGE EXAMPLES -->
 
