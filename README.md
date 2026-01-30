@@ -1,16 +1,21 @@
 Overview
 This repository contains R functions for performing category-level dominance analysis on environmental controls of denudation rates across the Chilean Andes. The approach combines ensemble model generation with LMG dominance analysis to robustly quantify the relative importance of five geomorphic process categories (Topography, Climate, Land Cover, Surface Materials, and Seismotectonics) while accounting for multicollinearity and limited sample sizes.
 
-📂 Repository Structure
+## 📂 Repository Structure
 
 ├── generate_models_ensemble_no_duplicates.R  # Model ensemble generator
+
 ├── Mdls_dominance_Analysis_OLS_AIC.R         # Dominance analysis workflow
+
 ├── run_analysis.R                             # Example script to run both functions
+
 ├── config.R                                   # Configuration parameters
+
 └── README.md                                  # This file
 
-🎯 Purpose
-Problem: Environmental predictors in Earth surface systems are inherently correlated (e.g., precipitation, vegetation, and elevation co-vary). Standard regression approaches produce unstable coefficients and ambiguous interpretations when multicollinearity is present.
+## Purpose
+Problem: 
+Environmental predictors in Earth surface systems are inherently correlated (e.g., precipitation, vegetation, and elevation co-vary). Standard regression approaches produce unstable coefficients and ambiguous interpretations when multicollinearity is present.
 
 Solution: This workflow:
 Generates a diverse ensemble of linear models with controlled complexity (5-6 predictors)
@@ -19,7 +24,7 @@ Performs Lindeman-Merenda-Gold (LMG) dominance analysis on selected models
 Aggregates results at the category level with uncertainty quantification
 
 
-🔧 Functions
+## 🔧 Functions
 
 1. generate_models_ensemble_no_duplicates()
 File: generate_models_ensemble_no_duplicates.R
@@ -33,7 +38,7 @@ Tracks predictor usage to balance selection across variables
 Generates reference models (full and subset end-members per category)
 Creates unique signatures to prevent duplicate models
 
-Arguments:
+## Arguments:
 generate_models_ensemble_no_duplicates(
   pool,              # Named list of predictors grouped by category
   n_random_models,   # Number of random interaction models to generate
