@@ -11,8 +11,8 @@ This repository contains R functions for performing category-level dominance ana
 
 🎯 Purpose
 Problem: Environmental predictors in Earth surface systems are inherently correlated (e.g., precipitation, vegetation, and elevation co-vary). Standard regression approaches produce unstable coefficients and ambiguous interpretations when multicollinearity is present.
-Solution: This workflow:
 
+Solution: This workflow:
 Generates a diverse ensemble of linear models with controlled complexity (5-6 predictors)
 Selects top-performing models using Akaike Information Criterion (AIC)
 Performs Lindeman-Merenda-Gold (LMG) dominance analysis on selected models
