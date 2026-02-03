@@ -37,8 +37,10 @@ config <- list(
   
   pool = list(
     # 1. Topography: Terrain steepnes & flatness, potential energy for moving material
-    Topography = c("Ksn", "ElevationRange",
-                   "Grad_prc90", "Grad_prc10"),
+    Topography = c("Ksn", 
+                   "LocalRelief",
+                   "Grad_prc90", "Grad_prc10" 
+                   ),
      
     # 2. Seismic: Endogenic forces (Shaking)
      Seismic = c("PGA50pc50yr", "Seis_Energy_Mean"),
@@ -49,11 +51,11 @@ config <- list(
     # 
     # 4. Surface materials: Material resistance
     Surface_materials   = c("Erodibility_lithological", "Prop_Granitic",
-                             "Prop_UnconsolidatedDeposits"),
+                             "Prop_UnconsolidatedDeposits", "SoilThickness_m"),
      
     # 5. Climate: Atmospheric forcing, transporting agents
     Climate     = c("MAP", "AnnualMax_daily_pr",
-                    "MAT_K")
+                    "MAT_K", "AridityIndex")
     ),
   
   # Define nature of predictors that will be used in the models for their transformation
@@ -71,7 +73,7 @@ config <- list(
   
   # Predictors that are proportions (0 to 1) -> Logit(x)
   Proportions_to_Logit =  c(
-    "fr_Slope_<_2deg", "fr_Slope_>_20deg",
+    "fr_Slope_Low_2deg", "fr_Slope_High_20deg",
     "LandSl_Hazard_Very_High",
     "glacier_fr",  "SnowCover_MeanAnnualfr", 
     "Prop_Granitic", "Prop_UnconsolidatedDeposits"
@@ -160,7 +162,7 @@ category_mapping <- c(
 all_dominance$Class <- category_mapping[all_dominance$Class]
 all_dominance$Class <- factor(
   all_dominance$Class, 
-  levels = c( 'Seismic','Surface materials','Climate', 'Land cover', 'Topography')
+  levels = c( 'Seismic','Surface materials','Land cover', 'Climate',  'Topography')
 )
 
 all_dominance$Dataset <- factor(
@@ -188,11 +190,11 @@ DA_plot<-ggplot(all_dominance, aes(x = Class,
   coord_flip() +
   #scale_fill_brewer(palette = "Set2") +
   #scale_y_continuous(labels = scales::percent) +
-  scale_y_continuous(#limits = c(0, 56), 
+  scale_y_continuous(limits = c(0, 59), 
                      expand = c(0, 0)) +
   labs(title = "Drivers of Denudation: Dominance Analysis",
-       subtitle = "LMG Relative Importance",
-       y = "Relative Importance (% of Explained Variance)", 
+       #subtitle = "LMG Relative Importance",
+       y = "General Dominance \n(% of Explained Variance)", 
        x = "") +
   theme_bw() +
   theme( 
@@ -227,6 +229,9 @@ DA_plot<-ggplot(all_dominance, aes(x = Class,
   )
 
 DA_plot
+
+output_dir<-"/Users/nestormac/Documents/Research/Berillyium/Plots/2025_Be_paper_plots/RawR"
+
 ggsave(DA_plot, 
        filename = file.path(output_dir,"DominanceAnalysis_CI.pdf"), 
        width = 13, height = 7.7, dpi = 300, units = "cm")
